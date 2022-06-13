@@ -1,0 +1,22 @@
+//Variables
+$maincolor: black;
+$contrastcolor: white;
+
+//Mix-ins AKA presets
+@mixin main {
+    color: $contrastcolor;
+    background-color: $maincolor;
+}
+
+.nav{
+    @include main;
+    display: flex;
+    a{
+        text-decoration: none;
+        margin: 10px;
+        font-size: large;
+    }
+    a:visited{
+        color: $contrastcolor;
+    }
+}
