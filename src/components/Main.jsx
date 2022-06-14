@@ -6,7 +6,7 @@ import Show from "../pages/Show";
 const Main = () => {
 
     const [people, setPeople] = useState(null);
-    const URL = 'http://localhost:4000/people';
+    const URL = 'http://localhost:4000/people/';
     
     //GET INDEX OF DATA
     const getPeople = async () => {
@@ -33,9 +33,17 @@ const Main = () => {
       await fetch (URL + id, {
         method: 'PUT',
         headers: {
-          "Content-Type": "Applications/json",
+          "Content-Type": "Application/json",
         },
         body: JSON.stringify(person),
+      }, console.log('person',person));
+    
+      getPeople();
+    }
+
+    const deletePerson = async id => {
+      await fetch (URL + id, {
+        method: "DELETE",
       });
       getPeople();
     }
@@ -50,7 +58,7 @@ const Main = () => {
       <Route exact path="/">
         <Index people={people} createPeople={createPeople}/>
       </Route>
-      <Route path="/people/:id" render={(rp) => <Show update={updatePeople} people={people} {...rp} />} />
+      <Route path="/people/:id" render={(rp) => <Show deletePerson={deletePerson}update={updatePeople} people={people} {...rp} />} />
     </div>
   );
 };
